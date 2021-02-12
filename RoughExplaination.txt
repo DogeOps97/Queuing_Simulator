@@ -1,0 +1,167 @@
+
+A really rough of the flow would be 
+
+Input count ------- > Select generator -------> Generate -------> Calculate Table -----> Print
+
+// Input count ------
+- User can select 
+	- how many counters are there
+	- how many customers
+
+// ------------- end ---
+
+
+// Select generator ---
+
+- User can pick any generator
+	- your pick I guess
+
+// ------------- end ---
+
+
+
+// Generate ----------
+
+- Generate array for RN_interarrival 
+	- with size defined by count 
+	- with generator selected earlier
+
+- Do the same as above to generate RN_serviceTime_C1 and RN_serviceTime_C2
+
+// ------------- end ---
+
+// Caluclate table ----
+
+- 	All sorts of unholy thing would go in here, 
+	although it would be elaborated down below
+
+// ------------- end ---
+
+
+// Print -------------
+
+-	Should be self-explanatory
+
+// ------------- end ---
+
+
+// ==============================================================================
+
+// Generate (count) number of value from 1 to MAX
+// Returns - array of (count) size with value ranging from 1 to MAX
+
+// The generator itself can be of any kind, and some generator requires some initial values
+// Naming of such generator would be
+// rand_(genName) eg. rand_default
+rand_*(initial_value1, initial_value2, ... , initial_valueN, count, MIN, MAX)
+
+RN_interArrival	= [25, 25, 63, 64, 12, 72]
+RN_serviceTime 	= [rn_s1, rn_s2, ... , rn_si]
+				= [43, 34, 65, 12, 14, 63]
+
+RN_temp = 	[25, 23, 43, 13, 23]
+
+eg.
+RN_interArrival = rand_default(10, 1, 100)
+eg. first		- count, how many values required
+	second		- min, lowest value, inclusive
+	third		- max, highest valu, inclusive
+// ==============================================================================
+
+// getInterArrival(value)
+// Given value (ranging from 0-x), return the interArrivalTime
+
+Example (the exact value can be changed, but generally, it should be represented in this format)
+-----------------------------------------------------------------------------
+| Arrival Time 	|	Probability 	|	CDF F(X) 	| 	Random no range	  	|
+-----------------------------------------------------------------------------
+|	1			|		0.10		|	0.10		|	1-10				|
+|	2			|		0.20		|	0.30		|	11-30				|
+|	3			|		0.30		|	0.60		|	31-60				|
+|	4			|		0.25		|	0.85		|	61-85				|
+|	5			|		0.10		|	0.95		|	86-95				|
+|	6			|		0.05		|	1.00		|	96-100				|
+-----------------------------------------------------------------------------
+
+Value (ranging from 1-100), return interArrivalTime based on range
+If value is 15, return 2
+
+// ===============================================================================
+
+getServiceTimeC1(value)
+// Given value passed in (ranging from 1-x), return the service time for counter 1
+
+Example
+Counter_1
+-----------------------------------------------------------------------------
+| Service Time 	|	Probability 	|	CDF F(X) 	| 	Random no range	  	|
+-----------------------------------------------------------------------------
+|	1			|		0.10		|	0.10		|	1-10				|
+|	2			|		0.20		|	0.30		|	11-30				|
+|	3			|		0.30		|	0.60		|	31-60				|
+|	4			|		0.25		|	0.85		|	61-85				|
+|	5			|		0.10		|	0.95		|	86-95				|
+|	6			|		0.05		|	1.00		|	96-100				|
+-----------------------------------------------------------------------------
+
+
+// ================================================================================
+
+getServiceTimeC2(value)
+// The almost the same getServiceTimeC1, though the probability and service time can be changed
+
+// ================================================================================
+
+
+// runQueueSimulation()
+
+c_no = customer number
+tmp	= temperature
+int_at = inter arrival time
+at = arrival time
+rn_st = random number, service time
+c_in_c = (num of) customer in centre
+t_en_c = time entering centre
+start = service time start
+st = service time
+end = service time end
+wt = waiting time
+ts = time spent (in the system)
+
+Few assumptions
+- Only 3 customers can be in the centre
+- Other customers have to wait outside
+- Any customer with temperature > 37.5 would get kicked out or kindly told to leave
+
+And for this simulation
+- Customers arrive at regular intervals
+- Counter takes the same time to service customers
+
+														counter1				counter2 	
+c_no	tmp		in_at	at 		rn_st	c_in_c	t_en_c	start 	st 		end 	start 	st		end 	wt  	ts
+1		36.4	0		0		50		0		0		0		5		5		-		-		-		0		5
+2		35.2	4		4		x 		1		1		-		-		-		4		5		9		0		5
+3		32.0	4		8		x 		1		8		8		5		10		-		-		-		0		5
+......
+
+// st fixed to 5, in_at fixed to 2, all cust < 37.5
+
+														| -- counter1 --- | 	| -- counter2 --- | 	
+c_no	tmp		in_at	at 		rn_st	c_in_c	t_en_c	start 	st 		end 	start 	st		end 	wt  	ts
+1		36.4	0		0		50		0		0		0		5		5		-		-		-		0		5
+2		35.2	2		2		x 		1		2		-		-		-		2		5		7		0		5
+3		32.0	2		4		x 		2		4		5		5		10		-		-		-		1		6
+4		32.0	2		6		x 		2		6		-		-		-		7		5		12		1		6
+5		32.2	2		8		x 		2		8		10		5		15		-		-		-		2		7
+
+
+
+// st fixed to 7, in_at fixed to 2, all cust < 37.5
+
+														| -- counter1 --- | 	| -- counter2 --- | 	
+c_no	tmp		in_at	at 		rn_st	c_in_c	t_en_c	start 	st 		end 	start 	st		end 	wt  	ts
+1		36.4	0		0		50		0		0		0		7		7		-		-		-		0		7
+2		35.2	2		2		x 		1		2		-		-		-		2		7		9		0		7
+3		32.0	2		4		x 		2		4		7		7		14		-		-		-		3		10		
+4		32.0	2		6		x 		3		7		-		-		-		9		7		16		3		10		
+5		32.2	2		8		x 		3		9		14		7		21		-		-		-		6		13	
