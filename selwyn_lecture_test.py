@@ -19,11 +19,9 @@ ahmad_table = [[3, 35],
                [6, 100]]
 
 results = []
-counter = 0
 
 interarrival_time = '-'
 arrival_time = 0
-waiters = [1, 1]
 max_ali = 0
 max_ahmad = 0
 
