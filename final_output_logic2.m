@@ -100,7 +100,11 @@ function output = final_output_logic2()
             if serve_history1 <= serve_history2
                 isCounter1 = 1;
             else
-                isCounter1 = 0;
+                if serve_history1  - arrival_time(i)<= 0
+                    isCounter1 = 1;
+                else
+                    isCounter1 = 0;
+                end
             end
                 
         end
