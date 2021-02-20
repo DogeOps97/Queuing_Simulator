@@ -163,11 +163,11 @@ function output = final_output_logic2()
     end
     
     for ( i = 1:length(customer_no))
-        printf('%d %d %d %d %d %d %d\n', customer_no(i), temperature(i), rng_inter_arrival_time(i), interarrival_time(i), arrival_time(i), customer_in_center(i), time_entering(i));
+        printf('%d      %d      %d      %d      %d      %d      %d\n', customer_no(i), temperature(i), rng_inter_arrival_time(i), interarrival_time(i), arrival_time(i), customer_in_center(i), time_entering(i));
     end
     printf('\n');
     for ( i = 1:length(customer_no))
-        printf('%d %d %d %d %d %d %d %d %d %d\n', customer_no(i), rng_service_time(i), service_time1(i), time_begins1(i), service_time_end1(i), service_time2(i), time_begins2(i), service_time_end2(i), waiting_time(i), time_spent(i));
+        printf('%d      %d      %d      %d      %d      %d      %d      %d      %d      %d\n', customer_no(i), rng_service_time(i), service_time1(i), time_begins1(i), service_time_end1(i), service_time2(i), time_begins2(i), service_time_end2(i), waiting_time(i), time_spent(i));
     end
     
 %    output = {{customer_no, temperature, rng_inter_arrival_time, interarrival_time, arrival_time, customer_in_center, time_entering},{customer_no, rng_service_time, service_time1, time_begins1, service_time_end1, service_time2, time_begins2, service_time_end2, waiting_time, time_spent}};
