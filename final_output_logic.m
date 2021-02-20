@@ -25,6 +25,7 @@ function output = final_output_logic()
     
     %Main Loop
     for i=1:length(rng_service_time)
+        printf('1');
         if i == 1
             interarrival_time(i) = -1;
             arrival_time(i) = 0;
@@ -70,7 +71,7 @@ function output = final_output_logic()
             else
                 time_in_queue(i) = 0;
                 for j = i-1:-1:1
-                        if output_counter1{3}(j) ~ -1 
+                        if output_counter1{3}(j) ~= -1 
                             if arrival_time(i) - output_counter1{3}(j)< 0
                                 time_in_queue(i) =  output_counter1{3}(j)- arrival_time(i);
                                 output_counter1{1}(i) =  output_counter1{3}(j);
@@ -102,14 +103,14 @@ function output = final_output_logic()
         else
             time_in_queue(i) = 0;
             for j = i-1:-1:1
-                    if output_counter2{3}(j) ~ -1 
-                        if arrival_time(i) - output_counter2{3}(j)< 0
+                    if output_counter2{3}(j) ~= -1 
+                        if arrival_time(i) - output_counter2{3}(j) < 0
                             time_in_queue(i) =  output_counter2{3}(j)- arrival_time(i);
                             output_counter2{1}(i) =  output_counter2{3}(j);
                         else
                             output_counter2{1}(i) = arrival_time(i);
                         end
-                        break
+                        break;
                     end
             end
             % set details for counter 1 at the specific index -1 to state empty
