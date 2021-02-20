@@ -7,8 +7,8 @@ function output = final_output_logic2()
     counter2 = {[3 4 5 6], [35 60 80 100]};
     customer_no = [1:length(rng_service_time)];
     total_customer = length(customer_no);
-    %temperature = MersenneTwisterInt(1,34,40,total_customer);
-    temperature = [36 36 36 36 36 36 36 36 36 36 36 36];
+    temperature = MersenneTwisterInt(1,34,40,total_customer);
+    %temperature = [36 36 36 36 36 36 36 36 36 36 36 36];
     max_customer_no = 2;
     
     %queue opertaion, c(:,1) = []--> remove first index, c(:,length(c)+1) = 2 --> add to last index
@@ -108,16 +108,16 @@ function output = final_output_logic2()
             end
                 
         end
-        if (temperature(i) < 35 & temperature(i) > 37)
+        if (temperature(i) < 35 | temperature(i) > 37)
             customer_in_center(i) = -1;
             time_entering(i) = -1;
             time_begins1(i) = -1;
             service_time1(i) = -1;
-            time_service_ends1(i) = -1;
+            service_time_end1(i) = -1;
             
             time_begins2(i) = -1;
             service_time2(i) = -1;
-            time_service_ends2(i) = -1;
+            service_time_end2(i) = -1;
             waiting_time = -1;
             time_spent = -1;
             serve_history(i) = -1;
