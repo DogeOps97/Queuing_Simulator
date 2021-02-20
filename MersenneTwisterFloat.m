@@ -9,7 +9,7 @@ function output = MersenneTwisterFloat(seed, count)
 		table(i) = seed / j;
 		period = period - 1;
 		if (period == 0)
-			printf("%s\n", "Pseudorandom period nearing");
+			printf('%s\n', 'Pseudorandom period nearing');
 			period = pow(2, 30);
 		end
 
