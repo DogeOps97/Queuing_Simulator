@@ -26,8 +26,8 @@ function output = main()
     random_temp = random_gaussian(totalCustomer, 36.5, 1.2);
 
     prob_inter = {[1:5];[sort(random_gen_nodupe(generatorType, 4)), 100]};
-    prob_counter1 = {[3:7];[sort(random_gen_nodupe(generatorType, 4)), 100]};
-    prob_counter2 = {[4:8];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter1 = {[5:9];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter2 = {[6:10];[sort(random_gen_nodupe(generatorType, 4)), 100]};
 
     final_output = final_output_logic2(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
 
