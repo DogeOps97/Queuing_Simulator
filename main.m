@@ -5,19 +5,31 @@ function output = main()
     printf('1 : Linear Congruential Generators\n');
     printf('2 : Random Variate Generator for Exponential Distribution\n');
     printf('3 : Random Variate Generator for Uniform Distribution\n');
+    printf('4 : Mersenne Twister\n');
 
     disp(' ');
 
     generatorType = input('Enter the choice for generator to use : ');
     totalCustomer = input('Enter total number of customers : ');
-    maxCustomer = input('Enter the maximum number of customers that are allowed to be in the center : ');
+    maxCustomer = input('Enter the maximum number of customers allowed in the center at the same time : ');
     
     disp(' ');
     
-    final_output = final_output_logic2();
-    
     a = 36.0;
     b = 15;
+
+    random_inter = random_gen(generatorType, totalCustomer);
+    random_inter(1)  = -1;
+
+    random_service = random_gen(generatorType, totalCustomer);
+
+    random_temp = random_gaussian(totalCustomer, 36.5, 1.2);
+
+    prob_inter = {[1:5];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter1 = {[3:7];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter2 = {[4:8];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+
+    final_output = final_output_logic2(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
 
     disp('------------------------------------------------------------------------------------------------------------------------------------');
     disp('|  Customer  |  Temperature  |      Random       |   Inter-arrival   |    Arrival    |   Number of customers   |   Time entering   |');
@@ -28,13 +40,13 @@ function output = main()
 
     for i=1 : totalCustomer    
         if i == 1 % first row interarrival time is '-'
-            if (final_output{1}{2}(i) < 35 | final_output{1}{2}(i) > 37)
+            if (final_output{1}{2}(i) >= 37.5)
                 printf('|%6d      |  %7.1f      |         -         |          -        |   %6d      |             -           |          -        |\n',  final_output{1}{1}(i), final_output{1}{2}(i),  final_output{1}{5}(i));
             else
                 printf('|%6d      |  %7.1f      |         -         |          -        |   %6d      |        %6d           |     %6d        |\n',  final_output{1}{1}(i), final_output{1}{2}(i),  final_output{1}{5}(i),  final_output{1}{6}(i),  final_output{1}{7}(i));      
             end
         else
-            if (final_output{1}{2}(i) < 35 | final_output{1}{2}(i) > 37)
+            if (final_output{1}{2}(i) >= 37.5)
                 printf('|%6d      |  %7.1f      |     %6d        |     %6d        |   %6d      |             -           |          -        |\n',  final_output{1}{1}(i),  final_output{1}{2}(i),  final_output{1}{3}(i),  final_output{1}{4}(i),  final_output{1}{5}(i));
             else
                 printf('|%6d      |  %7.1f      |     %6d        |     %6d        |   %6d      |        %6d           |     %6d        |\n',  final_output{1}{1}(i),  final_output{1}{2}(i),  final_output{1}{3}(i),  final_output{1}{4}(i),  final_output{1}{5}(i),  final_output{1}{6}(i),  final_output{1}{7}(i));
@@ -55,8 +67,8 @@ function output = main()
     disp('-------------------------------------------------------------------------------------------------------------------------------------------------');
 
     for i=1 : totalCustomer   
-        if (final_output{1}{2}(i) < 35 | final_output{1}{2}(i) > 37)
-            printf('|%6d      |  %6d      |      -     |        -       |        -       |     -      |        -       |        -       |     -     |    -    |\n', final_output{2}{1}(i), final_output{2}{2}(i));
+        if (final_output{1}{2}(i) >= 37.5)
+            printf('|%6d      |  %6d      |      -     |        -       |        -       |     -      |        -       |        -       |      -    |    -    |\n', final_output{2}{1}(i), final_output{2}{2}(i));
         else
             if final_output{2}{8}(i) == -1
                 printf('|%6d      |  %6d      |    %3d     |  %7d       |      %3d       |            |                |                |    %3d    |  %3d    |\n', final_output{2}{1}(i), final_output{2}{2}(i), final_output{2}{3}(i), final_output{2}{4}(i), final_output{2}{5}(i), final_output{2}{9}(i), final_output{2}{10}(i));

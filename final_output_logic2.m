@@ -1,15 +1,16 @@
-function output = final_output_logic2()
+function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,interarrival,counter1,counter2,temperature,max_customer_no)
     %test datas
-    rng_inter_arrival_time = [-1 26 98 90 26 42 74 80 68 22 48 34];
-    rng_service_time = [95 21 51 92 89 38 13 61 50 49 39 53];
-    interarrival={[1 2 3 4], [25 65 85 100]};
-    counter1 = {[2 3 4 5], [30 58 83 100]};
-    counter2 = {[3 4 5 6], [35 60 80 100]};
+    %rng_inter_arrival_time = [-1 26 98 90 26 42 74 80 68 22 48 34];
+    %rng_service_time = [95 21 51 92 89 38 13 61 50 49 39 53];
+    %interarrival={[1 2 3 4], [25 65 85 100]};
+    %counter1 = {[2 3 4 5], [30 58 83 100]};
+    %counter2 = {[3 4 5 6], [35 60 80 100]};
+    %temperature = MersenneTwisterInt(1,34,40,total_customer);
+    %temperature = [36 36 36 36 36 36 36 36 36 36 36 36];
+    %max_customer_no = 2;
+
     customer_no = [1:length(rng_service_time)];
     total_customer = length(customer_no);
-    temperature = MersenneTwisterInt(1,34,40,total_customer);
-    %temperature = [36 36 36 36 36 36 36 36 36 36 36 36];
-    max_customer_no = 2;
     
     %queue opertaion, c(:,1) = []--> remove first index, c(:,length(c)+1) = 2 --> add to last index
     queue1 = [];
@@ -106,7 +107,7 @@ function output = final_output_logic2()
             end
                 
         end
-        if (temperature(i) < 35 | temperature(i) > 37)
+        if (temperature(i) >= 37.5)
             customer_in_center(i) = -1;
             time_entering(i) = -1;
             time_begins1(i) = -1;
