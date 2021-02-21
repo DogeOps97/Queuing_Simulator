@@ -29,7 +29,90 @@ function output = main()
     prob_counter1 = {[5:9];[sort(random_gen_nodupe(generatorType, 4)), 100]};
     prob_counter2 = {[6:10];[sort(random_gen_nodupe(generatorType, 4)), 100]};
 
+    printf('\n### Random Interarrival Time Values :\n');
+
+    printf('( ');
+    for(i=2:totalCustomer - 1)
+        printf('%d ,', random_inter(i));
+    end
+    printf('%d )\n\n', random_inter(totalCustomer));
+
+    disp('### Random Service Time Values :');
+
+    printf('( ');
+    for(i=1:totalCustomer - 1)
+        printf('%d ,', random_service(i));
+    end
+    printf('%d )\n\n\n', random_service(totalCustomer));
+
+    disp('######################');
+    disp('# Interarrival Table #');
+    disp('######################');
+    printf('\n');
+
+    disp('----------------------------------------------------------------------');
+    disp('|  Interarrival  |  Probability  |      CDF      |   Random Number   |');
+    disp('|      Time      |               |               |       Range       |');
+    disp('----------------------------------------------------------------------');
+
+    for(i=1:5)
+        if(i == 1)
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_inter{2}(i))/100, float(prob_inter{2}(i))/100, 0, prob_inter{2}(i));
+        else
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_inter{2}(i) - prob_inter{2}(i-1))/100, float(prob_inter{2}(i))/100, prob_inter{2}(i-1) + 1, prob_inter{2}(i));
+        end
+        disp('----------------------------------------------------------------------');
+    end
+
+    printf('\n\n');
+    disp('###################');
+    disp('# Counter 1 Table #');
+    disp('###################');
+    printf('\n');
+
+    disp('---------------------------------------------------------------------');
+    disp('|    Service    |  Probability  |      CDF      |   Random Number   |');
+    disp('|     Time      |               |               |       Range       |');
+    disp('---------------------------------------------------------------------');
+
+    for(i=1:5)
+        if(i == 1)
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter1{2}(i))/100, float(prob_counter1{2}(i))/100, 0, prob_counter1{2}(i));
+        else
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter1{2}(i) - prob_counter1{2}(i-1))/100, float(prob_counter1{2}(i))/100, prob_counter1{2}(i-1) + 1, prob_counter1{2}(i));
+        end
+        disp('---------------------------------------------------------------------');
+    end
+
+    printf('\n\n');
+
+
+    disp('###################');
+    disp('# Counter 2 Table #');
+    disp('###################');
+    printf('\n');
+
+    disp('---------------------------------------------------------------------');
+    disp('|    Service    |  Probability  |      CDF      |   Random Number   |');
+    disp('|     Time      |               |               |       Range       |');
+    disp('---------------------------------------------------------------------');
+
+    for(i=1:5)
+        if(i == 1)
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter2{2}(i))/100, float(prob_counter2{2}(i))/100, 0, prob_counter2{2}(i));
+        else
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter2{2}(i) - prob_counter2{2}(i-1))/100, float(prob_counter2{2}(i))/100, prob_counter2{2}(i-1) + 1, prob_counter2{2}(i));
+        end
+        disp('---------------------------------------------------------------------');
+    end
+
     final_output = final_output_logic2(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
+
+    printf('\n\n')
+
+    disp('######################');
+    disp('# Main Output Tables #');
+    disp('######################');
 
     disp('------------------------------------------------------------------------------------------------------------------------------------');
     disp('|  Customer  |  Temperature  |      Random       |   Inter-arrival   |    Arrival    |   Number of customers   |   Time entering   |');
@@ -65,6 +148,7 @@ function output = main()
     disp('|            |    service   |   Service  |  Time Service  |  Time Service  |   Service  |  Time Service  |  Time Service  |           |         |');
     disp('|            |     time     |     time   |      begins    |      ends      |     time   |      begins    |      ends      |           |         |');
     disp('-------------------------------------------------------------------------------------------------------------------------------------------------');
+
 
     for i=1 : totalCustomer   
         if (final_output{1}{2}(i) >= 37.5)

@@ -1,11 +1,5 @@
 function output = random_gen(choice, num)
-
-    % x = zeros(1, num);
     seed = randi(1,1000000);
-
-    rng_lcg = @() mod(mod(3472989573 * randi(1,1000000) + 1, 2^32), 100);
-    rng_exp = @() -1 * 15 * log(1-rand());
-    rng_uniform = @() (100) * rand();
 
     for(i=1:num)
         switch(choice)
