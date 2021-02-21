@@ -165,3 +165,34 @@ function output = main()
 
     disp(' ');
 
+    counter1_time = 0;
+    counter2_time = 0;
+    max_time = 0;
+    queue_count = 0;
+    queue_total = 0;
+
+    for(i=1:totalCustomer)
+        if(final_output{2}{3}(i) >= 1)
+            counter1_time = counter1_time + final_output{2}{3}(i);
+        elseif(final_output{2}{6}(i) >= 1)
+            counter2_time = counter2_time + final_output{2}{6}(i);
+        end
+
+        if(final_output{2}{5}(i) > max_time)
+            max_time = final_output{2}{5}(i);
+        elseif(final_output{2}{8}(i) > max_time)
+            max_time = final_output{2}{8}(i);
+        end
+
+        if(final_output{2}{9}(i) > 0)
+            queue_count = queue_count + 1;
+            queue_total = queue_total + final_output{2}{9}(i);
+        end
+    end
+
+
+    printf('\nPercentage of time Counter 1 was busy : %.2f %%\n', (counter1_time/max_time) * 100);
+    printf('Percentage of time Counter 2 was busy : %.2f %%\n', (counter2_time/max_time) * 100);
+    printf('Probability of a customer having to wait in queue : %.2f\n', queue_count/totalCustomer);
+    printf('Average waiting time in queue : %.2f\n', queue_total/totalCustomer);
+
