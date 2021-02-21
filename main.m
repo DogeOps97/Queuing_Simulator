@@ -29,6 +29,45 @@ function output = main()
     prob_counter1 = {[3:7];[sort(random_gen_nodupe(generatorType, 4)), 100]};
     prob_counter2 = {[4:8];[sort(random_gen_nodupe(generatorType, 4)), 100]};
 
+    disp('######################');
+    disp('# Interarrival Table #');
+    disp('######################');
+    printf('\n');
+
+    disp('----------------------------------------------------------------------');
+    disp('|  Interarrival  |  Probability  |      CDF      |   Random Number   |');
+    disp('|      Time      |               |               |       Range       |');
+    disp('----------------------------------------------------------------------');
+
+    for(i=1:5)
+        if(i == 1)
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, prob_inter{2}(i)/100, prob_inter{2}(i)/100, 0, prob_inter{2}(i));
+        else
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, (prob_inter{2}(i) - prob_inter{2}(i-1))/100, prob_inter{2}(i)/100, prob_inter{2}(i-1) + 1, prob_inter{2}(i));
+        end
+        disp('----------------------------------------------------------------------');
+    end
+
+    printf('\n\n');
+    disp('######################');
+    disp('# Interarrival Table #');
+    disp('######################');
+    printf('\n');
+
+    disp('----------------------------------------------------------------------');
+    disp('|  Interarrival  |  Probability  |      CDF      |   Random Number   |');
+    disp('|      Time      |               |               |       Range       |');
+    disp('----------------------------------------------------------------------');
+
+    for(i=1:5)
+        if(i == 1)
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, prob_inter{2}(i)/100, prob_inter{2}(i)/100, 0, prob_inter{2}(i));
+        else
+            printf('|%8d        |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, (prob_inter{2}(i) - prob_inter{2}(i-1))/100, prob_inter{2}(i)/100, prob_inter{2}(i-1) + 1, prob_inter{2}(i));
+        end
+        disp('----------------------------------------------------------------------');
+    end
+
     final_output = final_output_logic2(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
 
     disp('------------------------------------------------------------------------------------------------------------------------------------');
@@ -59,12 +98,15 @@ function output = main()
     disp(' ');
     disp(' ');
 
+    final_output
+
     disp('-------------------------------------------------------------------------------------------------------------------------------------------------');
     disp('|  Customer  |    Random    |                   Counter 1                  |                   Counter 2                  |  Waiting  |  Time   |');
     disp('|   number   |  number for  |______________________________________________|______________________________________________|    time   |  spent  |');
     disp('|            |    service   |   Service  |  Time Service  |  Time Service  |   Service  |  Time Service  |  Time Service  |           |         |');
     disp('|            |     time     |     time   |      begins    |      ends      |     time   |      begins    |      ends      |           |         |');
     disp('-------------------------------------------------------------------------------------------------------------------------------------------------');
+
 
     for i=1 : totalCustomer   
         if (final_output{1}{2}(i) >= 37.5)
