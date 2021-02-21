@@ -201,4 +201,4 @@ function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,in
     %    printf('%d\n', used_index(i));
     %end
     
-  output = {{customer_no, temperature, rng_inter_arrival_time, interarrival_time, arrival_time, customer_in_center, time_entering},{customer_no, rng_service_time, service_time1, time_begins1, service_time_end1, service_time2, time_begins2, service_time_end2, waiting_time, time_spent}};
+  output = {{customer_no, temperature, rng_inter_arrival_time, interarrival_time, arrival_time, customer_in_center, time_entering},{customer_no, rng_service_time, service_time1, time_begins1, service_time_end1, service_time2, time_begins2, service_time_end2, waiting_time, time_spent},combined_service_time_end};

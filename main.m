@@ -33,7 +33,7 @@ function output = main()
 
     printf('( ');
     for(i=2:totalCustomer - 1)
-        printf('%d ,', random_inter(i));
+        printf('%d, ', random_inter(i));
     end
     printf('%d )\n\n', random_inter(totalCustomer));
 
@@ -190,9 +190,24 @@ function output = main()
         end
     end
 
-
-    printf('\nPercentage of time Counter 1 was busy : %.2f %%\n', (counter1_time/max_time) * 100);
+    
+    disp('######################');
+    disp('#   Activities Logs  #');
+    disp('######################');
+    message_exhibition(totalCustomer, final_output{2}{5}, final_output{2}{8}, final_output{1}{5}, final_output{1}{2}, final_output{1}{7});
+    printf('\n');
+    disp('######################');
+    disp('#     Statistics     #');
+    disp('######################');
+    printf('Percentage of time Counter 1 was busy : %.2f %%\n', (counter1_time/max_time) * 100);
     printf('Percentage of time Counter 2 was busy : %.2f %%\n', (counter2_time/max_time) * 100);
     printf('Probability of a customer having to wait in queue : %.2f\n', queue_count/totalCustomer);
     printf('Average waiting time in queue : %.2f\n', queue_total/totalCustomer);
 
+    
+    
+    
+    
+    
+    
+    
