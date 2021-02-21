@@ -12,10 +12,6 @@ function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,in
     customer_no = [1:length(rng_service_time)];
     total_customer = length(customer_no);
     
-    %queue opertaion, c(:,1) = []--> remove first index, c(:,length(c)+1) = 2 --> add to last index
-    queue1 = [];
-    queue2 = [];
-    
     interarrival_time = [];
     arrival_time = [0];
     waiting_time = [];
@@ -90,7 +86,7 @@ function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,in
             end
             customer_in_center(i) = temp_customer_in_center;
             
-            if max_customer_no == customer_in_center(i)
+            if max_customer_no - customer_in_center(i) <= 0
                 time_entering(i) = min_service_end;
             else
                 time_entering(i) = arrival_time(i);
@@ -117,8 +113,8 @@ function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,in
             time_begins2(i) = -1;
             service_time2(i) = -1;
             service_time_end2(i) = -1;
-            waiting_time = -1;
-            time_spent = -1;
+            waiting_time(i) = -1;
+            time_spent(i) = -1;
             serve_history(i) = -1;
             continue;
         end
