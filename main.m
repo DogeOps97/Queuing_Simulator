@@ -41,7 +41,7 @@ function output = main()
 
     printf('( ');
     for(i=1:totalCustomer - 1)
-        printf('%d ,', random_service(i));
+        printf('%d, ', random_service(i));
     end
     printf('%d )\n\n\n', random_service(totalCustomer));
 
@@ -77,9 +77,9 @@ function output = main()
 
     for(i=1:5)
         if(i == 1)
-            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter1{2}(i))/100, float(prob_counter1{2}(i))/100, 0, prob_counter1{2}(i));
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', prob_counter1{1}(i), float(prob_counter1{2}(i))/100, float(prob_counter1{2}(i))/100, 0, prob_counter1{2}(i));
         else
-            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter1{2}(i) - prob_counter1{2}(i-1))/100, float(prob_counter1{2}(i))/100, prob_counter1{2}(i-1) + 1, prob_counter1{2}(i));
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', prob_counter1{1}(i), float(prob_counter1{2}(i) - prob_counter1{2}(i-1))/100, float(prob_counter1{2}(i))/100, prob_counter1{2}(i-1) + 1, prob_counter1{2}(i));
         end
         disp('---------------------------------------------------------------------');
     end
@@ -99,9 +99,9 @@ function output = main()
 
     for(i=1:5)
         if(i == 1)
-            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter2{2}(i))/100, float(prob_counter2{2}(i))/100, 0, prob_counter2{2}(i));
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', prob_counter2{1}(i), float(prob_counter2{2}(i))/100, float(prob_counter2{2}(i))/100, 0, prob_counter2{2}(i));
         else
-            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', i, float(prob_counter2{2}(i) - prob_counter2{2}(i-1))/100, float(prob_counter2{2}(i))/100, prob_counter2{2}(i-1) + 1, prob_counter2{2}(i));
+            printf('|%8d       |    %6.2f     |    %6.2f     |  %6d - %-6d  |\n', prob_counter2{1}(i), float(prob_counter2{2}(i) - prob_counter2{2}(i-1))/100, float(prob_counter2{2}(i))/100, prob_counter2{2}(i-1) + 1, prob_counter2{2}(i));
         end
         disp('---------------------------------------------------------------------');
     end
