@@ -26,8 +26,8 @@ function output = main()
     random_temp = random_gaussian(totalCustomer, 36.5, 1.2);
 
     prob_inter = {[1:5];[sort(random_gen_nodupe(generatorType, 4)), 100]};
-    prob_counter1 = {[3:7];[sort(random_gen_nodupe(generatorType, 4)), 100]};
-    prob_counter2 = {[4:8];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter1 = {[5:9];[sort(random_gen_nodupe(generatorType, 4)), 100]};
+    prob_counter2 = {[6:10];[sort(random_gen_nodupe(generatorType, 4)), 100]};
 
     printf('\n### Random Interarrival Time Values :\n');
 
