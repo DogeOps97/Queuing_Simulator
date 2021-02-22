@@ -1,17 +1,6 @@
 function output = final_output_logic(rng_inter_arrival_time,rng_service_time,interarrival,counter1,counter2,temperature,max_customer_no)
-    %test datas
-    %rng_inter_arrival_time = [-1 26 98 90 26 42 74 80 68 22 48 34];
-    %rng_service_time = [95 21 51 92 89 38 13 61 50 49 39 53];
-    %interarrival={[1 2 3 4], [25 65 85 100]};
-    %counter1 = {[2 3 4 5], [30 58 83 100]};
-    %counter2 = {[3 4 5 6], [35 60 80 100]};
-    %temperature = MersenneTwisterInt(1,34,40,total_customer);
-    %temperature = [36 36 36 36 36 36 36 36 36 36 36 36];
-    %max_customer_no = 2;
 
     customer_no = [1:length(rng_service_time)];
-    total_customer = length(customer_no);
-    
     interarrival_time = [];
     arrival_time = [0];
     waiting_time = [];
@@ -24,7 +13,6 @@ function output = final_output_logic(rng_inter_arrival_time,rng_service_time,int
     customer_in_center = [0];
     isCounter1 = 1;
     
-    %{[time_begins], [service_time], [time_service_ends]}
     time_begins1 = [];
     service_time1 = [];
     service_time_end1=[];
@@ -33,7 +21,6 @@ function output = final_output_logic(rng_inter_arrival_time,rng_service_time,int
     service_time2 = [];
     service_time_end2=[];
     min_service_end_index = 0;
-    prev_customer_index = 0;
     
     %make sure got first case
     got_first = 0;
@@ -51,9 +38,6 @@ function output = final_output_logic(rng_inter_arrival_time,rng_service_time,int
             %check got how many ppl in the center before
             temp_customer_in_center = 0;
             end_of_loop = 0;
-            min_service_end = 0;
-            temp_min_service_end_1 = 0;
-            temp_min_service_end_2 = 0;
             for j = i - 1: -1 : 1
                 %if serve_history is obsolte (cause of temperature)
                 if serve_history(j) == -1
@@ -79,12 +63,7 @@ function output = final_output_logic(rng_inter_arrival_time,rng_service_time,int
                 end
             end
             
-            
-            if temp_min_service_end_1 < temp_min_service_end_2
-                min_service_end = temp_min_service_end_1;
-            else
-                min_service_end = temp_min_service_end_2;
-            end
+        
             customer_in_center(i) = temp_customer_in_center;
             
             if max_customer_no - customer_in_center(i) <= 0 & temperature(i) < 37.5
@@ -201,4 +180,4 @@ function output = final_output_logic(rng_inter_arrival_time,rng_service_time,int
     %    printf('%d\n', used_index(i));
     %end
     
-  output = {{customer_no, temperature, rng_inter_arrival_time, interarrival_time, arrival_time, customer_in_center, time_entering},{customer_no, rng_service_time, service_time1, time_begins1, service_time_end1, service_time2, time_begins2, service_time_end2, waiting_time, time_spent},combined_service_time_end};
+  output = {{customer_no, temperature, rng_inter_arrival_time, interarrival_time, arrival_time, customer_in_center, time_entering},{customer_no, rng_service_time, service_time1, time_begins1, service_time_end1, service_time2, time_begins2, service_time_end2, waiting_time, time_spent}};
