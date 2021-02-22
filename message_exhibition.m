@@ -27,26 +27,51 @@ function output = message_exhibition(totalCustomer, service_time_end_1, service_
     end
     
     % here it goes
+    got_event = 1;
     for ( i = 0: last)
         for( j = 1 : totalCustomer)
-            if i - arrival_time(j) < 0 
+            if i - arrival_time(j) < 0
                 break;
             end
             
+            % customer cannot enter due to high temperature
             if time_entering(j) == -1 & arrival_time(j) == i 
-                printf('Customer %d arrived at minute %d and was not allowed to enter the centre\n', j, arrival_time(j));
-            end
-
-            if time_entering(j) ~= -1 & arrival_time(j) == i 
-                printf('Customer %d arrived at minute %d and entered the centre at minute %d\n', j, arrival_time(j), time_entering(j));
+                printf('Customer %d arrived at minute %d and was not allowed to enter the centre due to high temperature.\n', j, arrival_time(j));
+                got_event = 1;
             end
             
+            % customer have to wait outside due to full max customer
+            if time_entering(j) ~= -1 &  arrival_time(j) == i & arrival_time(j)~= time_entering(j)
+                printf('Customer %d arrived at minute %d and have to wait outside due to maximum customer.\n', j, arrival_time(j));
+                got_event = 1;
+            end
+            
+            %customer waiting outside entering the store
+            if time_entering(j) ~= -1 &  time_entering(j) == i & arrival_time(j)~= time_entering(j)
+                printf('Customer %d can finally go in the center at minute %d.\n', j, time_entering(j));
+                got_event = 1;
+            end
+            
+            % customer allowed to enter center
+            if time_entering(j) ~= -1 & arrival_time(j) == i &  time_entering(j) == arrival_time(j)
+                printf('Customer %d arrived at minute %d and entered the center at minute %d.\n', j, arrival_time(j), time_entering(j));
+                got_event = 1;
+            end
+            
+            %see if customer come out
             if service_time_end_1(j) == i
-                printf('Departure of customer %d minute %d\n', j, service_time_end_1(j));
+                printf('Departure of Customer %d minute %d.\n', j, service_time_end_1(j));
+                got_event = 1;
             end
 
             if service_time_end_2(j) == i
-                printf('Departure of customer %d minute %d\n', j, service_time_end_2(j));
+                printf('Departure of Customer %d minute %d.\n', j, service_time_end_2(j));
+                got_event = 1;
             end
+        end
+        
+        if got_event
+            printf('\n');
+            got_event = 0;
         end
     end
