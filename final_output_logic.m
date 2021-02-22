@@ -1,4 +1,4 @@
-function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,interarrival,counter1,counter2,temperature,max_customer_no)
+function output = final_output_logic(rng_inter_arrival_time,rng_service_time,interarrival,counter1,counter2,temperature,max_customer_no)
     %test datas
     %rng_inter_arrival_time = [-1 26 98 90 26 42 74 80 68 22 48 34];
     %rng_service_time = [95 21 51 92 89 38 13 61 50 49 39 53];

@@ -8,6 +8,8 @@ function output = main()
     printf('4 : Mersenne Twister\n');
 
     disp(' ');
+    
+    % user input and error handling
     generatorType = input('Enter the choice for generator to use : ');
     while (generatorType > 4 | generatorType < 1)
         disp('type of generator must be in the option range');
@@ -116,7 +118,7 @@ function output = main()
         disp('---------------------------------------------------------------------');
     end
 
-    final_output = final_output_logic2(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
+    final_output = final_output_logic(random_inter, random_service, prob_inter, prob_counter2, prob_counter2, random_temp, maxCustomer);
 
     printf('\n\n')
 
