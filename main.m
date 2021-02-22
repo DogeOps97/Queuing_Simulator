@@ -8,11 +8,21 @@ function output = main()
     printf('4 : Mersenne Twister\n');
 
     disp(' ');
-
     generatorType = input('Enter the choice for generator to use : ');
+    while (generatorType > 4 | generatorType < 1)
+        disp('type of generator must be in the option range');
+        generatorType = input('Enter the choice for generator to use again: ');
+    end
     totalCustomer = input('Enter total number of customers : ');
+    while (totalCustomer <= 0)
+        disp('Total customer must be a positive integer!');
+        totalCustomer = input('Enter total number of customers again: ');
+    end
     maxCustomer = input('Enter the maximum number of customers allowed in the center at the same time : ');
-    
+    while (maxCustomer < 2)
+        disp('Maximum number of customer must be 2 or higher!');
+         maxCustomer = input('Enter the maximum number of customers allowed in the center at the same time : ');
+    end
     disp(' ');
     
     a = 36.0;

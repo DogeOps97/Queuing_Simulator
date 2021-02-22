@@ -21,7 +21,7 @@ function output = final_output_logic2(rng_inter_arrival_time,rng_service_time,in
     serve_history1 = 0;
     serve_history2 = 0;
     used_index = [];
-    customer_in_center = [];
+    customer_in_center = [0];
     isCounter1 = 1;
     
     %{[time_begins], [service_time], [time_service_ends]}
